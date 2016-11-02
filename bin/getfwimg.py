@@ -2,8 +2,8 @@
 
 # insert keys here, your keys were set correctly if the crc32 of the fw.img
 # is d674201b and the crc32 of the fw.img.full.bin is 9f2c91ff in the end
-wiiu_common_key = "you have to insert this yourself"
-starbuck_ancast_key = "you have to insert this yourself"
+wiiu_common_key = "B5D8AB06ED7F6CFC529F2CE1B4EA32FD"
+starbuck_ancast_key = "91C9D008312851EF6B228BF14BAD4322"
 
 # Don't edit past here
 
