@@ -1,3 +1,4 @@
+#Don't edit
 import codecs
 import sys
 import struct
