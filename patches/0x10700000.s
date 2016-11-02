@@ -1,3 +1,4 @@
+#very big arm
 .arm.big
 
 .open "sections/0x10700000.bin","patched_sections/0x10700000.bin",0x10700000
