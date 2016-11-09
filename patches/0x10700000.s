@@ -49,6 +49,7 @@ FS_MLC_READ2 equ 0x107DCDE4
 FS_MLC_WRITE1 equ 0x107DC0C0
 FS_MLC_WRITE2 equ 0x107DC73C
 FS_SDCARD_READ1 equ 0x107BDDD0
+FS_SDCARD_READ1 equ 0x107BDDD0
 FS_SDCARD_WRITE1 equ 0x107BDD60
 FS_ISFS_READWRITEBLOCKS equ 0x10720324
 FS_CRYPTO_HMAC equ 0x107F3798
@@ -57,13 +58,13 @@ FS_REGISTERMDPHYSICALDEVICE equ 0x10718860
 
 .include "ios_fs/ios_fs.syms"
 
-; patches start here
+#patches start here
 
 .org 0x107F0B68
 	bl syslogOutput_hook
 
-; null out references to slcSomething1 and slcSomething2
-; (nulling them out is apparently ok; more importantly, i'm not sure what they do and would rather get a crash than unwanted slc-writing)
+#null out references to slcSomething1 and slcSomething2
+#(nulling them out is apparently ok; more importantly, i'm not sure what they do and would rather get a crash than unwanted slc-writing)
 .org 0x107B96B8
 	.word 0x00000000
 	.word 0x00000000
