@@ -4,6 +4,7 @@
 #include "imports.h"
 #include "sdio.h"
 #include "text.h"
+#include "heart.h"
 
 void * getMdDeviceById(int deviceId)
 {
