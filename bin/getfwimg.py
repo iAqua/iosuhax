@@ -29,7 +29,7 @@ if zlib.crc32(starbuck_ancast_key) & 0xffffffff != 0xe6e36a34:
     print("starbuck_ancast_key is wrong")
     sys.exit(1)
 
-print("downloading osv10 cetk")
+print("downloading cetk osv10")
 
 #download osv10 cetk
 f = urlopen("http://ccs.cdn.wup.shop.nintendo.net/ccs/download/000500101000400A/cetk")
@@ -46,7 +46,7 @@ iv = codecs.decode("000500101000400A0000000000000000", 'hex')
 cipher = AES.new(wiiu_common_key, AES.MODE_CBC,iv)
 dec_key = cipher.decrypt(enc_key)
 
-print("downloading fw.img")
+print("downloading encrypted fw.img")
 #download encrypted 5.5.1 fw img
 
 f = urlopen("http://ccs.cdn.wup.shop.nintendo.net/ccs/download/000500101000400A/0000136e")
@@ -54,7 +54,7 @@ if not f:
     print("0000136e download failed!")
     sys.exit(2)
 
-print("decrypt first")
+print("decrypting")
 #decrypt fw img with our decrypted key
 with open("fw.img","wb") as fout:
     iv = codecs.decode("00090000000000000000000000000000", "hex")
@@ -71,7 +71,7 @@ with open('fw.img', 'rb') as f:
         print("fw.img is corrupt, try again")
         sys.exit(2)
 
-print("decrypt second")
+print("and another decrypt")
 #decrypt ancast image with ancast key and (for now) wrong iv
 with open("fw.img", "rb") as f:
     with open("fw.img.full.bin","wb") as fout:
@@ -85,7 +85,7 @@ with open("fw.img", "rb") as f:
             enc = cipher.decrypt(dec)
             fout.write(enc)
 
-print("decrypt third")
+print("final decrypt")
 #fix up ancast image with correct iv
 with open('fw.img.full.bin', 'rb+') as f:
     #grab iv from decrypted image
@@ -111,7 +111,7 @@ with open('fw.img.full.bin', 'rb+') as f:
 
 with open('fw.img.full.bin', 'rb') as f:
     if (zlib.crc32(f.read()) & 0xffffffff) != 0x9f2c91ff:
-        print("fw.img.full.bin is corrupt, try again with better keys")
+        print("fw.img.full.bin is corrupt, try again with the proper keys")
         sys.exit(2)
 
 print("done!")
